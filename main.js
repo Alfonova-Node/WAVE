@@ -184,6 +184,7 @@ const claim = async (mnemonic) => {
         var _config = fs.readFileSync('./config.json', 'utf-8')
         var config = JSON.parse(_config)
         var sui_amount_to_send = config.sui_amount_to_send
+        var temp_sui_send = parseFloat(sui_amount_to_send) * 1000000000
         const main_client = new SuiKit({ mnemonics: main_mnemonic })
         const main_address = main_client.getAddress()
         const main_balance = (await main_client.getBalance(SUI_CA)).totalBalance / 1000000000
@@ -199,9 +200,10 @@ const claim = async (mnemonic) => {
             var recv_client = new SuiKit({ mnemonics: meme })
             var recv_address = recv_client.getAddress()
             console.log(`${hijau}receiver address : ${putih}${recv_address}`)
-            var result = main_client.transferSui(recv_address, sui_amount_to_send)
+            var result = await main_client.transferSui(recv_address, temp_sui_send)
             console.log(`${hijau}sending SUI ${sui_amount_to_send}`)
             console.log(line)
+            await delay(3000)
             st += 1
         }
         exit()
