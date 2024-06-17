@@ -1,0 +1,8 @@
+{
+  "type": "module",
+  "dependencies": {
+    "@mysten/sui": "^1.1.2",
+    "@scallop-io/sui-kit": "^0.52.0",
+    "delay": "^6.0.0"
+  }
+}
